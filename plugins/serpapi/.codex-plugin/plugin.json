@@ -1,0 +1,43 @@
+{
+  "name": "serpapi",
+  "version": "0.1.0",
+  "description": "SerpApi search skills and MCP tools for Codex.",
+  "author": {
+    "name": "SerpApi",
+    "url": "https://serpapi.com/"
+  },
+  "homepage": "https://serpapi.com",
+  "repository": "https://github.com/serpapi/serpapi-codex-plugin",
+  "license": "MIT",
+  "keywords": [
+    "serpapi",
+    "search",
+    "web-search",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "SerpApi",
+    "shortDescription": "Search Google, Bing, news, images, shopping, maps, and more.",
+    "longDescription": "SerpApi brings live web search into Codex across Google, Bing, DuckDuckGo, YouTube, Amazon, Google Maps, Google Scholar, news, images, shopping, flights, hotels, finance, and more. Use it to research current topics, verify claims, compare prices, find local businesses, discover media, and gather source-backed context without leaving your workflow. It supports 100+ SerpApi engines and uses your SERPAPI_KEY for authenticated requests.",
+    "developerName": "SerpApi",
+    "category": "Productivity",
+    "capabilities": [
+      "Search",
+      "MCP",
+      "Web"
+    ],
+    "websiteURL": "https://serpapi.com/",
+    "privacyPolicyURL": "https://serpapi.com/legal#privacy-policy",
+    "termsOfServiceURL": "https://serpapi.com/legal#terms-of-service",
+    "brandColor": "#377FEA",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png",
+    "defaultPrompt": [
+      "Research recent AI search news and summarize the strongest sources.",
+      "Compare AirPods Pro prices across Amazon, Walmart, and Google Shopping.",
+      "Find highly rated coffee shops near Times Square with hours and reviews."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

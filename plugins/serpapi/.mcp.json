@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "serpapi": {
+      "type": "http",
+      "url": "https://mcp.serpapi.com/mcp",
+      "bearer_token_env_var": "SERPAPI_KEY"
+    }
+  }
+}
