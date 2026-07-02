@@ -16,24 +16,6 @@ Sign up at [serpapi.com](https://serpapi.com/users/sign_up) and set your API key
 export SERPAPI_KEY="your_key_here"
 ```
 
-The bundled skill and MCP server configuration both use `SERPAPI_KEY`. The plugin's MCP config sends it as a bearer token to SerpApi's hosted MCP server.
-
-If you prefer to add the MCP server directly to Codex config, use the same secret name:
-
-```bash
-codex mcp add serpapi \
-  --url https://mcp.serpapi.com/mcp \
-  --bearer-token-env-var SERPAPI_KEY
-```
-
-Equivalent `config.toml`:
-
-```toml
-[mcp_servers.serpapi]
-url = "https://mcp.serpapi.com/mcp"
-bearer_token_env_var = "SERPAPI_KEY"
-```
-
 ### 2. Install the plugin
 
 Register the marketplace, then install the plugin:
@@ -58,6 +40,8 @@ Codex will use the SerpApi skill when you ask it to search for current or web-so
 You can also explicitly ask Codex to use SerpApi:
 
 > *Use SerpApi to search Google News for OpenAI announcements this week*
+
+For detailed install and MCP configuration instructions, see [INSTALL.md](INSTALL.md).
 
 ## Features
 

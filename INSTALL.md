@@ -16,13 +16,13 @@ codex plugin add serpapi@serpapi
 
 ## SerpApi MCP Configuration
 
-The plugin and skill both use the same secret name:
+The bundled skill and MCP server configuration both use `SERPAPI_KEY`. The plugin's MCP config sends it as a bearer token to SerpApi's hosted MCP server.
 
 ```bash
 export SERPAPI_KEY="your_key_here"
 ```
 
-To add the SerpApi MCP server directly to Codex config:
+If you prefer to add the MCP server directly to Codex config, use the same secret name:
 
 ```bash
 codex mcp add serpapi \
