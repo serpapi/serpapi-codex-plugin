@@ -1,41 +1,31 @@
-# Installation
+# Installation and authentication
 
-## GitHub Marketplace Install
+## Install from GitHub
 
 ```bash
 codex plugin marketplace add serpapi/serpapi-codex-plugin --ref main
 codex plugin add serpapi@serpapi
 ```
 
-## Local Development Install
+## Install from a local checkout
+
+Run these commands from the repository root:
 
 ```bash
 codex plugin marketplace add .
 codex plugin add serpapi@serpapi
 ```
 
-## SerpApi MCP Configuration
+After installation, start a new task in the client where the plugin is installed. For Codex CLI, start a new session.
 
-The bundled skill and MCP server configuration both use `SERPAPI_KEY`. The plugin's MCP config sends it as a bearer token to SerpApi's hosted MCP server.
+## Configure SerpApi
 
-```bash
-export SERPAPI_KEY="your_key_here"
-```
+Use the bundled [serpapi-setup skill](plugins/serpapi/skills/serpapi-setup/SKILL.md) to configure SerpApi. In a new task, ask:
 
-If you prefer to add the MCP server directly to Codex config, use the same secret name:
+> Use serpapi-setup to configure SerpApi and verify that search works.
 
-```bash
-codex mcp add serpapi \
-  --url https://mcp.serpapi.com/mcp \
-  --bearer-token-env-var SERPAPI_KEY
-```
+You need a SerpApi account and API key. Let the setup skill guide you through the supported credential flow for your environment.
 
-Equivalent `config.toml`:
+Follow the skill's prompts. It checks for existing access, guides credential setup for your environment, and verifies a real search before continuing with `serpapi-web-search`.
 
-```toml
-[mcp_servers.serpapi]
-url = "https://mcp.serpapi.com/mcp"
-bearer_token_env_var = "SERPAPI_KEY"
-```
-
-Start a new Codex thread after installing or changing MCP configuration.
+If access stops working in a later task or session, ask `serpapi-setup` to repair and verify the connection.

@@ -1,93 +1,81 @@
-# <img src="plugins/serpapi/assets/logo.png" width="30" height="30"/> SerpApi Plugin for Codex
+# <img src="plugins/serpapi/assets/logo.png" width="30" height="30"/> SerpApi for ChatGPT and Codex
 
-A Codex plugin that gives Codex the ability to search Google, Amazon, Walmart, YouTube, Google Maps, Google Scholar, and [100+ other engines](https://serpapi.com/search-engine-apis) via [SerpApi](https://serpapi.com).
+Search current results from [SerpApi's 100+ engines](https://serpapi.com/llms.txt). This skills-only plugin includes `serpapi-setup` and `serpapi-web-search`, adapted from SerpApi's upstream skills. They configure access and search through MCP, CLI, or raw cURL. The package does not include an MCP server.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Engines](https://img.shields.io/badge/engines-107-blue.svg)](plugins/serpapi/skills/serpapi-web-search/rules/ENGINES.md)
-[![MCP](https://img.shields.io/badge/MCP-SerpApi-blue.svg)](https://serpapi.com/integrations/mcp)
+[![Plugin](https://img.shields.io/badge/plugin-skills--only-blue.svg)](plugins/serpapi/.codex-plugin/plugin.json)
 
-## Quick Start
+## Install
 
-### 1. Get an API key
-
-Sign up at [serpapi.com](https://serpapi.com/users/sign_up) and set your API key:
-
-```bash
-export SERPAPI_KEY="your_key_here"
-```
-
-### 2. Install the plugin
-
-Register the marketplace, then install the plugin:
+After publication, you can install SerpApi from the Plugin Directory in ChatGPT or Codex. The GitHub commands below install the version currently published on `main`. To test local changes before publication, use the local-checkout commands instead:
 
 ```bash
 codex plugin marketplace add serpapi/serpapi-codex-plugin --ref main
 codex plugin add serpapi@serpapi
 ```
 
-Start a new Codex thread after installation so the plugin's skills and MCP tools are loaded.
+To test a local checkout, run these commands from the repository root:
 
-### 3. Use it
+```bash
+codex plugin marketplace add .
+codex plugin add serpapi@serpapi
+```
 
-Codex will use the SerpApi skill when you ask it to search for current or web-sourced information. Just ask in natural language:
+After installation, start a new task in the client where the plugin is installed. For Codex CLI, start a new session.
 
-> *Search Google for the best Python web frameworks*
->
-> *Compare prices for AirPods Pro on Amazon, Walmart, and eBay*
->
-> *Find academic papers about transformer architectures published after 2020*
+## Authenticate
 
-You can also explicitly ask Codex to use SerpApi:
+Ask the agent:
 
-> *Use SerpApi to search Google News for OpenAI announcements this week*
+> Set up SerpApi, verify access, and then search for recent OpenAI announcements.
 
-For detailed install and MCP configuration instructions, see [INSTALL.md](INSTALL.md).
+Follow the bundled [serpapi-setup skill](plugins/serpapi/skills/serpapi-setup/SKILL.md) to configure and verify access. A SerpApi account and API key are required. See [INSTALL.md](INSTALL.md) for installation and guided setup.
 
-## Features
+The execution environment needs a working SerpApi MCP connection or a shell with HTTPS access for CLI or cURL. Installing the skills does not add shell access or an MCP connection to a client that lacks them.
 
-- **Single skill, all engines** - `serpapi-web-search` covers SerpApi's 100+ supported engines. Codex chooses the right engine based on intent.
-- **MCP-ready** - Ships a `.mcp.json` definition for SerpApi's hosted MCP server.
-- **Auto-invocation** - Codex can load the search skill for research, news, shopping, maps, academic, image, video, and other web-backed requests.
-- **Cost-aware defaults** - The skill defaults to `google_light` for simple web searches because it is faster and lighter than the full Google engine.
-- **Fallback-friendly** - Supports MCP first, then `serpapi-cli`, SDKs, or curl when those are available.
-- **Schema-guided usage** - The plugin ships engine selection guidance, parameter references, response notes, examples, and multi-engine patterns.
+## Use
 
-## Supported Engines
+Ask in natural language. For example:
 
-| Category | Engines |
-|----------|---------|
-| Web Search | Google, Google Light, Bing, DuckDuckGo, Yahoo, Yandex, Baidu, Naver |
-| AI Search | Google AI Mode, Google AI Overview, Bing Copilot, Brave AI Mode |
-| Shopping | Amazon, Walmart, eBay, Google Shopping, Home Depot |
-| Local / Maps | Google Maps, Google Local, Yelp, TripAdvisor, OpenTable |
-| Research | Google Scholar, Google Patents, Google Trends |
-| News | Google News, Bing News, DuckDuckGo News, Baidu News |
-| Media | Google Images, Google Videos, YouTube, Google Lens |
-| Travel | Google Flights, Google Hotels, Google Travel Explore |
-| Jobs | Google Jobs |
-| Finance | Google Finance |
-| Apps | Google Play, Apple App Store |
+> Use SerpApi to find the latest OpenAI announcements and cite the strongest sources.
 
-See the full list in [`plugins/serpapi/skills/serpapi-web-search/rules/ENGINES.md`](plugins/serpapi/skills/serpapi-web-search/rules/ENGINES.md).
+> Compare current AirPods Pro listings on Amazon, Walmart, and eBay.
 
-## Troubleshooting
+> Find recent papers about retrieval-augmented generation in Google Scholar.
 
-- **Invalid API key**: Verify your key at [serpapi.com/manage-api-key](https://serpapi.com/manage-api-key).
-- **MCP tools not available**: Start a new Codex thread after installing the plugin or changing MCP configuration.
-- **Plugin not listed**: Run `codex plugin marketplace list`, then reinstall with `codex plugin add serpapi@serpapi`.
-- **Quota or rate limit exceeded**: Check usage in the [SerpApi dashboard](https://serpapi.com/dashboard) or review [pricing](https://serpapi.com/pricing).
+The skill uses `google_light` for general web research. It selects a specialized engine when the request involves news, images, shopping, maps, academic papers, travel, finance, products, or reviews.
 
-## Development and Contributing
+## How it works
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for source installation, local validation, and contribution workflow.
+- The `serpapi-setup` skill detects the environment, configures access, and verifies a real search.
+- The `serpapi-web-search` skill selects an engine and reuses the verified MCP, CLI, or cURL route.
+- Engine and parameter guidance comes from the API pages in [SerpApi's `llms.txt`](https://serpapi.com/llms.txt).
+- Search recipes cover field selection, pagination, and source links.
 
-## Related
+## Authentication limits
 
-- [SerpApi MCP Server](https://github.com/serpapi/serpapi-mcp) - MCP server integration for Codex, Claude Desktop, VS Code, Cursor, and other MCP-compatible clients
-- [SerpApi Skills](https://github.com/serpapi/skills) - Upstream SerpApi skill source
-- [SerpApi Docs](https://serpapi.com/search-api) - Full API reference
-- [SerpApi Playground](https://serpapi.com/playground) - Interactive API explorer
+Missing access starts guided setup. The skill checks the selected route's credential source, verifies a real request, and retries the original search. A working MCP connection needs no local key copy. If setup is blocked, the search stays pending until access is ready or you explicitly choose another provider.
+
+Use `serpapi-setup` to configure or repair credentials for the current environment. Do not paste an API key into ordinary chat or a repository file.
+
+## Documentation
+
+- [Installation and authentication](INSTALL.md)
+- [Setup skill](plugins/serpapi/skills/serpapi-setup/SKILL.md)
+- [Search skill](plugins/serpapi/skills/serpapi-web-search/SKILL.md)
+- [Supported engines](plugins/serpapi/skills/serpapi-web-search/references/engines.md)
+- [Request and response gotchas](plugins/serpapi/skills/serpapi-web-search/references/gotchas.md)
+- [Search recipes](plugins/serpapi/skills/serpapi-web-search/references/recipes.md)
+- [SerpApi API index](https://serpapi.com/llms.txt)
+
+## Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for validation and source-install instructions.
+
+## Support
+
+Contact [SerpApi support](https://serpapi.com/#contact) for account or search issues. Report plugin issues in the [GitHub repository](https://github.com/serpapi/serpapi-codex-plugin/issues).
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT. See [LICENSE](LICENSE).

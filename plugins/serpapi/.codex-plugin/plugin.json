@@ -1,7 +1,7 @@
 {
   "name": "serpapi",
-  "version": "0.1.0",
-  "description": "SerpApi search skills and MCP tools for Codex.",
+  "version": "0.2.0",
+  "description": "Search web, news, shopping, maps, and more with SerpApi.",
   "author": {
     "name": "SerpApi",
     "url": "https://serpapi.com/"
@@ -13,18 +13,17 @@
     "serpapi",
     "search",
     "web-search",
-    "mcp"
+    "research"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "SerpApi",
-    "shortDescription": "Search Google, Bing, news, images, shopping, maps, and more.",
-    "longDescription": "SerpApi brings live web search into Codex across Google, Bing, DuckDuckGo, YouTube, Amazon, Google Maps, Google Scholar, news, images, shopping, flights, hotels, finance, and more. Use it to research current topics, verify claims, compare prices, find local businesses, discover media, and gather source-backed context without leaving your workflow. It supports 100+ SerpApi engines and uses your SERPAPI_KEY for authenticated requests.",
+    "shortDescription": "Search the web with SerpApi",
+    "longDescription": "Search structured results from Google, Bing, YouTube, Amazon, Google Maps, Google Scholar, and other SerpApi engines. Find product listings, local places, academic papers, travel options, news, and source links. Requires a SerpApi account and API key. Use serpapi-setup to configure access through an available MCP connection, CLI, or cURL before searching.",
     "developerName": "SerpApi",
     "category": "Productivity",
     "capabilities": [
       "Search",
-      "MCP",
       "Web"
     ],
     "websiteURL": "https://serpapi.com/",
@@ -34,10 +33,9 @@
     "composerIcon": "./assets/logo.png",
     "logo": "./assets/logo.png",
     "defaultPrompt": [
-      "Research recent AI search news and summarize the strongest sources.",
-      "Compare AirPods Pro prices across Amazon, Walmart, and Google Shopping.",
-      "Find highly rated coffee shops near Times Square with hours and reviews."
+      "Find this week's major AI search news and cite the original sources.",
+      "Compare current AirPods Pro listings on Amazon, Walmart, and eBay.",
+      "Find well-reviewed coffee shops near Times Square."
     ]
-  },
-  "mcpServers": "./.mcp.json"
+  }
 }
