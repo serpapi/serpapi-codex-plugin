@@ -1,6 +1,6 @@
 # SerpApi engine catalog
 
-Complete list of 120 SerpApi search engines. Prefer `_light` variants for faster, smaller responses. Read the selected engine's MCP resource or linked docs for conditional requirements and optional parameters. A dash means no unconditional input besides engine and authentication.
+Complete list of 121 SerpApi search engines, checked against official documentation on 2026-10-01. Prefer `_light` variants for faster, smaller responses. Read the selected engine's linked docs for conditional requirements and optional parameters. A dash means no unconditional input besides engine and authentication.
 
 Links, required inputs, and counts are refreshed from official docs by the [catalog refresh script in serpapi/skills](https://github.com/serpapi/skills/blob/bd619180b58faeb814ed1bc555a7a73088671809/scripts/refresh_engine_catalog.py). Descriptions and result mappings are curated.
 
@@ -58,12 +58,13 @@ Links, required inputs, and counts are refreshed from official docs by the [cata
 | [`duckduckgo_maps`](https://serpapi.com/duckduckgo-maps-api.md) | DuckDuckGo Maps results | q |
 | [`duckduckgo_news`](https://serpapi.com/duckduckgo-news-api.md) | DuckDuckGo News results | q |
 
-## Ebay (2 engines)
+## Ebay (3 engines)
 
 | Engine | Description | Required inputs |
 |---|---|---|
 | [`ebay`](https://serpapi.com/ebay-search-api.md) | eBay product search | _nkw |
 | [`ebay_product`](https://serpapi.com/ebay-product-api.md) | eBay product details | product_id |
+| [`ebay_seller`](https://serpapi.com/ebay-seller-api.md) | eBay seller profile and product listings | seller_id, type |
 
 ## Facebook (1 engine)
 
@@ -239,6 +240,7 @@ Links, required inputs, and counts are refreshed from official docs by the [cata
 | Images (`google_images_light`, `google_images`) | `images_results` |
 | Shopping (`google_shopping_light`, `google_shopping`) | `shopping_results` |
 | Product search (`amazon`, `walmart`, `ebay`) | `organic_results` |
+| eBay seller (`ebay_seller`) | `seller_results`, `product_results` |
 | Jobs (`google_jobs`) | `jobs_results` |
 | Maps (`google_maps`) — list | `local_results` |
 | Maps (`google_maps`) — single place | `place_results` |

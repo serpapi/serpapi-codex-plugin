@@ -1,6 +1,6 @@
 # Search recipes
 
-Run these requests through the route verified by `serpapi-setup`. The JSON objects are engine parameters: place them inside MCP `params`, translate them to CLI `name=value` arguments, or to cURL `--data-urlencode` arguments using the setup guide. CLI-only examples apply when CLI was selected; they are not a reason to install it or change routes.
+Run these requests through the route verified by `serpapi-setup`. The JSON objects are engine parameters: translate them to CLI `name=value` arguments or to cURL `--data-urlencode` arguments using the setup guide. CLI-only examples apply when CLI was selected; they are not a reason to install it or change routes.
 
 ## Nonstandard inputs
 

@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "SerpApi",
     "shortDescription": "Search the web with SerpApi",
-    "longDescription": "Search structured results from Google, Bing, YouTube, Amazon, Google Maps, Google Scholar, and other SerpApi engines. Find product listings, local places, academic papers, travel options, news, and source links. Requires a SerpApi account and API key. Use serpapi-setup to configure access through an available MCP connection, CLI, or cURL before searching.",
+    "longDescription": "Search structured results from Google, Bing, YouTube, Amazon, Google Maps, Google Scholar, and other SerpApi engines. Find product listings, local places, academic papers, travel options, news, and source links.",
     "developerName": "SerpApi",
     "category": "Productivity",
     "capabilities": [
@@ -27,6 +27,7 @@
       "Web"
     ],
     "websiteURL": "https://serpapi.com/",
+    "supportURL": "https://serpapi.com/#contact",
     "privacyPolicyURL": "https://serpapi.com/legal#privacy-policy",
     "termsOfServiceURL": "https://serpapi.com/legal#terms-of-service",
     "brandColor": "#377FEA",

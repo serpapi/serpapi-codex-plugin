@@ -44,7 +44,7 @@ In a fresh task, test setup and search:
 
 > Use SerpApi to search Google Light for coffee.
 
-The agent should reuse working access or load `serpapi-setup`, verify a real search through the selected route, and resume the request. Require a nonempty organic title and link with no API error. A successful login or HTTP 200 alone is insufficient. Test the Windows helper on native Windows before claiming its dialog and DPAPI storage work.
+The agent should reuse working access or load `serpapi-setup`, verify a real search through the selected route, and resume the request. Require a nonempty organic title and link with no API error.
 
 ## Build the submission archive
 
@@ -57,17 +57,13 @@ package_dir=$(mktemp -d)
 unzip -t "$package_dir/serpapi-plugin-0.2.0.zip"
 ```
 
-Upload that ZIP through the `Skills only` submission path. Keep the MIT license inside the plugin directory and do not package repository-level files beside `serpapi/`. Follow [SUBMISSION.md](SUBMISSION.md) for listing details, review cases, and release checks.
+Upload that ZIP through the `Skills only` submission path. Keep the MIT license inside the plugin directory and do not package repository-level files beside `serpapi/`.
 
-## Sync the upstream skills
+## SerpApi Engines Source of Truth
 
-Both skill directories are based on [serpapi/skills PR #7](https://github.com/serpapi/skills/pull/7) at revision [`bd619180b58faeb814ed1bc555a7a73088671809`](https://github.com/serpapi/skills/tree/bd619180b58faeb814ed1bc555a7a73088671809/skills). The PR was open when imported. Local changes in the two `SKILL.md` files clarify user-instruction precedence, scope setup to SerpApi tasks, reload credentials for each requesting process, and treat retrieved content as untrusted data. Reference edits clarify the same-call cURL requirement, credential-bearing connector URLs, and the upstream catalog link and singular headings. Credential helpers remain unchanged.
-
-Replace both directories together when syncing a new revision, including their references and credential helpers. Remove files absent from the new source so obsolete helpers and instructions are not packaged. Preserve sibling links between `serpapi-setup` and `serpapi-web-search`, review the local changes above before replacing them, update this revision, and rerun validation. Keep upstream contributor scripts, tests, and CI configuration outside the plugin package.
 
 Use [SerpApi's `llms.txt`](https://serpapi.com/llms.txt) as the index of published API documentation. Each linked Markdown page declares its engine identifier in its front matter and documents its required inputs. Do not infer one engine's parameters from another engine.
 
-Make shared skill and catalog changes in [serpapi/skills](https://github.com/serpapi/skills), run its contributor checks, and sync the resulting revision here.
 
 ## Contribution workflow
 

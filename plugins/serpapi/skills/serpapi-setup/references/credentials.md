@@ -1,14 +1,13 @@
 # Credential storage and retrieval
 
-Reuse the credential source already working for the chosen route. The skill can use a key through the user's process or MCP connection without displaying it. Do not extract a key from a working MCP connector to create a second store.
+Reuse the credential source already working for the chosen route. Load the key into the requesting process without displaying it or creating another stored copy.
 
 For new storage, prefer the client's sensitive credential input or an available OS secret store. Explain the prompt and launch it when the host lets the user interact with it. Otherwise give the exact command for their terminal and wait for completion. A tool's stdin or allocated PTY is not necessarily visible or writable by the user. Secret reads must happen inside a variable assignment or pipe, never as a standalone tool call that prints the key. Disable shell tracing before reading secrets. Do not put literal keys in commands, chat, `.env` files in repositories, or shell profiles.
 
-The load functions return a failure without exiting your terminal and clear a stale environment key when loading fails. Stop on that failure; do not make a request. An environment variable lasts only in that process and its children. Load the key again for later agent commands, or launch the client from the process that loaded it. A desktop app already running will not inherit an export from an unrelated terminal. Cloud connectors cannot read the local keychain or filesystem.
+The load functions return a failure without exiting your terminal and clear a stale environment key when loading fails. Stop on that failure; do not make a request. An environment variable lasts only in that process and its children. Load the key again for later agent commands, or launch the client from the process that loaded it. A desktop app already running will not inherit an export from an unrelated terminal. A remote execution host needs its own credential source.
 
 | Environment | Preferred source | Retrieval |
 |---|---|---|
-| Connected MCP | Client-managed credential | Invoke the connected tool; no local key copy |
 | macOS | Keychain | Assignment below in the requesting process |
 | Linux desktop | Existing Secret Service | `secret-tool` assignment below |
 | Native Windows | DPAPI-protected user file | PowerShell load step below |
@@ -138,4 +137,4 @@ The CLI reads its own config. Do not `source` a TOML file or print it to recover
 
 ## CI and remote agents
 
-Use the host's secret manager to inject `SERPAPI_KEY` into the job or agent process. Record only the secret's name and scope. Do not copy local key files into a repository, image, or artifact. Confirm that the actual job or MCP client receives the variable before testing access.
+Use the host's secret manager to inject `SERPAPI_KEY` into the job or agent process. Record only the secret's name and scope. Do not copy local key files into a repository, image, or artifact. Confirm that the actual requesting process receives the variable before testing access.

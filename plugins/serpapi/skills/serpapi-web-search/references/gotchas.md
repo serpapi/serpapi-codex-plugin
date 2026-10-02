@@ -1,6 +1,6 @@
 # Request and response gotchas
 
-Use the engine's current MCP resource (`serpapi://engines/<engine>`) when available, otherwise its [official documentation link](engines.md). The Search tool's generic parameter object does not describe every engine's requirements.
+Read the engine's current [official documentation](engines.md) before choosing parameters. Required inputs and response fields differ between engines.
 
 ## Query and time filters
 
@@ -17,13 +17,12 @@ Resolve place names with the [Locations API](https://serpapi.com/locations-api) 
 
 | Route | Response handling |
 |---|---|
-| MCP | Use JSON for field extraction, Markdown for reading. The current server accepts `output=json` or `output=md`, not HTML. Tool content can be a JSON string or a plain-text error; check both content and MCP error status. |
 | CLI | Use embedded `--jq` for extraction and `--fields` for server filtering. Check the process status before trusting output. |
 | cURL / REST | JSON is suitable for extraction; REST also supports HTML and Markdown. Keep the setup guide's safe credential transport and check HTTP status plus the body. |
 
-`mode="compact"` removes `search_metadata`, `search_parameters`, `search_information`, `pagination`, and `serpapi_pagination`. Use complete MCP responses when you need the search ID or pagination; retain only needed fields in notes afterward. `json_restrictor` and CLI `--fields` can also remove fields you later need.
+`json_restrictor` and CLI `--fields` can remove fields you later need. Include the search ID or pagination fields when the task requires them; retain only needed fields in notes afterward.
 
-For manual pagination, inspect `serpapi_pagination.next` or the engine's next-page token. Validate that a next URL is an HTTPS SerpApi Search API URL, then carry its query parameters into the next request through the same route. Keep authentication in the selected credential source, and preserve required response filters that the next URL may omit. Never pass a URL as the MCP `params` object or assume every engine uses `start`.
+For manual pagination, inspect `serpapi_pagination.next` or the engine's next-page token. Validate that a next URL is an HTTPS SerpApi Search API URL, then carry its query parameters into the next request through the same route. Keep authentication in the selected credential source, and preserve required response filters that the next URL may omit. Do not assume every engine uses `start`.
 
 For CLI pagination, use `--all-pages` with an explicit `--max-pages` within the user's search budget. The CLI merges result arrays; this can produce a large response. Stop when pagination is absent, repeats, or reaches the chosen limit.
 
@@ -41,6 +40,6 @@ Keep caching enabled unless the task requires a fresh crawl. An identical cached
 
 Do not combine `no_cache=true` with `async=true`. Async submission is not supported for accounts with [Ludicrous Speed](https://serpapi.com/ludicrous-speed). ZeroTrace disables server-side retention; do not promise archive recovery for those requests.
 
-Save the search ID when later archive access matters, using a complete response. The [Archive API](https://serpapi.com/search-archive-api) can retrieve retained searches for up to 31 days. Through the CLI, use `serpapi archive "$SEARCH_ID"`; through cURL, use the archive endpoint with the same protected credential method. A search-only MCP connection does not imply an archive tool exists.
+Save the search ID when later archive access matters. The [Archive API](https://serpapi.com/search-archive-api) can retrieve retained searches for up to 31 days. Through the CLI, use `serpapi archive "$SEARCH_ID"`; through cURL, use the archive endpoint with the same protected credential method.
 
 On quota, transport, API, or tool failures, consult [serpapi-setup](../../serpapi-setup/SKILL.md) and follow its repair path. Keep the original route and task attached to the diagnostic.
