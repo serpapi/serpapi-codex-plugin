@@ -18,9 +18,11 @@ Resolve place names with the [Locations API](https://serpapi.com/locations-api) 
 | Route | Response handling |
 |---|---|
 | CLI | Use embedded `--jq` for extraction and `--fields` for server filtering. Check the process status before trusting output. |
-| cURL / REST | JSON is suitable for extraction; REST also supports HTML and Markdown. Keep the setup guide's safe credential transport and check HTTP status plus the body. |
+| Direct HTTP / cURL | Use `/search.json` for exact field extraction or `/search.md` for reading results. Keep the setup guide's safe credential transport and check HTTP status plus the body. |
 
 `json_restrictor` and CLI `--fields` can remove fields you later need. Include the search ID or pagination fields when the task requires them; retain only needed fields in notes afterward.
+
+Markdown can omit internal fields. Use JSON when a follow-up needs exact IDs or tokens from the engine tables and recipes. Both formats accept the same engine-specific query parameters and `api_key`; use the [HTTP guide](../../serpapi-setup/references/http.md) for a request tool without a shell.
 
 For manual pagination, inspect `serpapi_pagination.next` or the engine's next-page token. Validate that a next URL is an HTTPS SerpApi Search API URL, then carry its query parameters into the next request through the same route. Keep authentication in the selected credential source, and preserve required response filters that the next URL may omit. Do not assume every engine uses `start`.
 

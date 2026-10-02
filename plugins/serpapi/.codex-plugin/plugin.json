@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "SerpApi",
-    "shortDescription": "Search the web with SerpApi",
-    "longDescription": "Search structured results from Google, Bing, YouTube, Amazon, Google Maps, Google Scholar, and other SerpApi engines. Find product listings, local places, academic papers, travel options, news, and source links.",
+    "shortDescription": "Search web, news, and more",
+    "longDescription": "Search Google, Bing, YouTube, Amazon, Google Maps, and more through SerpApi. Research news, compare product prices, find local businesses, and discover academic papers with links to the sources. Requires a SerpApi account and API key to get started.",
     "developerName": "SerpApi",
     "category": "Productivity",
     "capabilities": [

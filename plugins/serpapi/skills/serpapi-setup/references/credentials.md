@@ -2,6 +2,8 @@
 
 Reuse the credential source already working for the chosen route. Load the key into the requesting process without displaying it or creating another stored copy.
 
+For direct HTTP without a shell, use the host's private credential input and secret binding described in the [HTTP guide](http.md). The host injects the `api_key` query parameter; the agent uses a credential reference rather than reading the key. The OS-store commands and helpers below apply when a shell is available.
+
 For new storage, prefer the client's sensitive credential input or an available OS secret store. Explain the prompt and launch it when the host lets the user interact with it. Otherwise give the exact command for their terminal and wait for completion. A tool's stdin or allocated PTY is not necessarily visible or writable by the user. Secret reads must happen inside a variable assignment or pipe, never as a standalone tool call that prints the key. Disable shell tracing before reading secrets. Do not put literal keys in commands, chat, `.env` files in repositories, or shell profiles.
 
 The load functions return a failure without exiting your terminal and clear a stale environment key when loading fails. Stop on that failure; do not make a request. An environment variable lasts only in that process and its children. Load the key again for later agent commands, or launch the client from the process that loaded it. A desktop app already running will not inherit an export from an unrelated terminal. A remote execution host needs its own credential source.
