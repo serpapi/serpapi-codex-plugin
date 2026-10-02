@@ -38,7 +38,7 @@ Fetch [SerpApi's documentation index](https://serpapi.com/llms.txt) to discover 
 
 ## Use results
 
-Read [gotchas](references/gotchas.md) for query-name differences, output modes, time filters, pagination, and response caveats. Read [recipes](references/recipes.md) for field selection, Maps reviews, AI Overview follow-ups, Flights extraction, and bounded parallel searches.
+Read [output formats](references/gotchas.md#output-formats) to choose `output=json`, `output=md`, or `output=html`. The same reference covers query-name differences, time filters, pagination, and response caveats. Read [recipes](references/recipes.md) for field selection, Maps reviews, AI Overview follow-ups, Flights extraction, and bounded parallel searches.
 
 Include search IDs or pagination in response filters when the task needs them. Capture source links, selected fields, and the search ID when needed in working notes before discarding a response.
 

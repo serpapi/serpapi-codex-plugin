@@ -13,6 +13,20 @@ Do not substitute `q` for every engine's input: YouTube uses `search_query`, Ama
 
 Resolve place names with the [Locations API](https://serpapi.com/locations-api) when a locale is ambiguous. For Maps, put the city in the query or use `ll`; a map center does not guarantee every result lies within a specific boundary.
 
+## Output formats
+
+Set `output` on `GET https://serpapi.com/search` to choose the response format. Keep the same engine-specific search parameters and protected authentication for each format.
+
+| Format | Parameter | When to use |
+|---|---|---|
+| JSON | `output=json` (default) | Setup verification, exact field extraction, numeric values, IDs, and pagination tokens |
+| Markdown | `output=md` | Reading and summarizing results with source links |
+| HTML | `output=html` | Inspecting the raw search-engine response where the selected engine provides HTML, such as debugging a missing parsed field |
+
+`/search.json` and `/search.md` also select JSON and Markdown respectively. Markdown is also available with `Accept: text/markdown`. Use one format selector at a time and honor the user's requested format. See [Search API output formats](https://serpapi.com/search-api) and [Markdown output](https://serpapi.com/markdown-output).
+
+Markdown can omit internal fields; use JSON when a follow-up needs exact IDs or tokens from the engine tables and recipes. HTML is the engine's raw response, not the full contents of every linked result page. Check the selected engine's documentation for HTML availability. JSON parsers and CLI `--jq` filters require JSON output; do not apply them to Markdown or HTML.
+
 ## Output and pagination by route
 
 | Route | Response handling |
@@ -22,7 +36,7 @@ Resolve place names with the [Locations API](https://serpapi.com/locations-api) 
 
 `json_restrictor` and CLI `--fields` can remove fields you later need. Include the search ID or pagination fields when the task requires them; retain only needed fields in notes afterward.
 
-Markdown can omit internal fields. Use JSON when a follow-up needs exact IDs or tokens from the engine tables and recipes. Both formats accept the same engine-specific query parameters and `api_key`; use the [HTTP guide](../../serpapi-setup/references/http.md) for a request tool without a shell.
+Use the [HTTP guide](../../serpapi-setup/references/http.md) for a request tool without a shell.
 
 For manual pagination, inspect `serpapi_pagination.next` or the engine's next-page token. Validate that a next URL is an HTTPS SerpApi Search API URL, then carry its query parameters into the next request through the same route. Keep authentication in the selected credential source, and preserve required response filters that the next URL may omit. Do not assume every engine uses `start`.
 
